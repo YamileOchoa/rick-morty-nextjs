@@ -1,94 +1,60 @@
+<div align="center">
+
 # ⚛ Rick & Morty — Portal Database
 
-Aplicación Next.js 14 que consume la API de Rick and Morty implementando SSG, SSR, ISR y CSR con un diseño sci-fi oscuro.
+**Aplicación Next.js que explora el multiverso de Rick and Morty**  
+con estrategias de renderizado modernas: SSG · ISR · CSR
+
+[![Next.js](https://img.shields.io/badge/Next.js_14-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+
+🔗 [**Ver demo en vivo**](https://rick-morty-nextjs-kefo.vercel.app) · [**Repositorio**](https://github.com/YamileOchoa/rick-morty-nextjs.git)
+
+</div>
 
 ---
 
-## 🚀 Pasos para ejecutar localmente
-
-### 1. Clonar el repositorio
-
-```bash
-git clone https://github.com/YamileOchoa/rick-morty-nextjs.git
-cd rick-morty-nextjs
-```
-
-### 2. Instalar dependencias
-
-```bash
-npm install
-```
-
-### 3. Ejecutar en desarrollo
-
-```bash
-npm run dev
-```
-
-Abre [http://localhost:3000](http://localhost:3000)
-
-### 4. Build de producción
-
-```bash
-npm run build
-npm run start
-```
-
----
-
-## 🌐 Despliegue en Vercel
-
-### Opción A — Deploy automático desde GitHub (recomendado)
-
-1. Sube tu proyecto a GitHub
-2. Entra a [vercel.com](https://vercel.com) → **Add New Project**
-3. Importa tu repositorio
-4. Vercel detecta Next.js automáticamente → click **Deploy**
-5. ¡Listo! Obtienes una URL tipo `https://rick-morty-xxx.vercel.app`
-
-### Opción B — Deploy con Vercel CLI
-
-```bash
-# Instalar CLI
-npm install -g vercel
-
-# Hacer deploy
-vercel
-
-# Deploy a producción
-vercel --prod
-```
-
----
-
-## 📁 Estructura del Proyecto
+## 📁 Estructura del proyecto
 
 ```
 rick-morty-nextjs/
 ├── src/
 │   ├── app/
-│   │   ├── layout.tsx              # Layout raíz con Navbar
-│   │   ├── page.tsx                # Página principal (SSG)
-│   │   ├── globals.css             # Estilos globales + fuentes
-│   │   ├── not-found.tsx           # Página 404 personalizada
+│   │   ├── layout.tsx                  # Layout raíz con Navbar y metadata
+│   │   ├── page.tsx                    # Página principal — SSG
+│   │   ├── globals.css                 # Estilos globales + fuentes
+│   │   ├── not-found.tsx               # Página 404 personalizada
 │   │   ├── search/
-│   │   │   └── page.tsx            # Página de búsqueda (CSR)
-│   │   └── character/
-│   │       └── [id]/
-│   │           └── page.tsx        # Detalle de personaje (ISR + generateStaticParams)
+│   │   │   └── page.tsx                # Búsqueda — CSR
+│   │   └── character/[id]/
+│   │       └── page.tsx                # Detalle — ISR + generateStaticParams
 │   ├── components/
-│   │   ├── Navbar.tsx              # Barra de navegación
-│   │   ├── CharacterCard.tsx       # Tarjeta con Lazy Loading
-│   │   └── SearchClient.tsx        # Búsqueda en tiempo real ('use client')
+│   │   ├── Navbar.tsx                  # Barra de navegación sticky
+│   │   ├── CharacterCard.tsx           # Tarjeta con Lazy Loading
+│   │   └── SearchClient.tsx            # Búsqueda en tiempo real (use client)
 │   ├── lib/
-│   │   └── api.ts                  # Funciones fetch hacia la API
+│   │   └── api.ts                      # Llamadas a la Rick and Morty API
 │   └── types/
-│       └── character.ts            # Interfaces TypeScript
-├── next.config.js                  # Config de imágenes externas
+│       └── character.ts                # Interfaces TypeScript
+├── next.config.js
 ├── tailwind.config.ts
-├── tsconfig.json
 └── package.json
 ```
+
+---
+
+## 🚀 Instalación
+
+```bash
+git clone https://github.com/YamileOchoa/rick-morty-nextjs.git
+cd rick-morty-nextjs
+npm install
+npm run dev
+```
+
+Abre [http://localhost:3000](http://localhost:3000)
 
 ---
 
@@ -116,7 +82,7 @@ rick-morty-nextjs/
 ## 🔗 Links
 
 - **Repositorio:** `https://github.com/YamileOchoa/rick-morty-nextjs.git`
-- **App en Vercel:** `https://rick-morty-TU_PROYECTO.vercel.app`
+- **App en Vercel:** `https://rick-morty-nextjs-kefo.vercel.app/`
 
 ---
 
