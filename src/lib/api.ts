@@ -20,47 +20,23 @@ export async function getCharacterById(id: number): Promise<Character> {
   return res.json();
 }
 
-// ISR - para generateStaticParams necesitamos todos los IDs
+// ISR - para generateStaticParams necesitamos algunos IDs
 export async function getAllCharacterIds(): Promise<number[]> {
-  const delay = (ms: number) => new Promise((r) => setTimeout(r, ms));
+  const ids: number[] = [];
 
-  async function fetchPage(page: number, retries = 3): Promise<ApiResponse> {
-    for (let attempt = 0; attempt < retries; attempt++) {
-      try {
-        const res = await fetch(`${BASE_URL}/character?page=${page}`, {
-          cache: "force-cache",
-        });
-        const contentType = res.headers.get("content-type") || "";
-        if (!res.ok || !contentType.includes("application/json")) {
-          throw new Error(`HTTP ${res.status}`);
-        }
-        return res.json();
-      } catch (err) {
-        if (attempt < retries - 1) {
-          await delay(500 * (attempt + 1)); // backoff: 500ms, 1000ms...
-        } else {
-          throw err;
-        }
-      }
+  // Solo primeras 2 páginas
+  for (let page = 1; page <= 2; page++) {
+    const res = await fetch(`${BASE_URL}/character?page=${page}`, {
+      cache: "force-cache",
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}`);
     }
-    throw new Error(`No se pudo obtener la página ${page}`);
-  }
 
-  // Página 1 para saber el total
-  const first = await fetchPage(1);
-  const totalPages = first.info.pages;
-  const ids: number[] = first.results.map((c) => c.id);
+    const data: ApiResponse = await res.json();
 
-  // Resto en lotes de 5 para no saturar la API
-  const BATCH = 5;
-  for (let start = 2; start <= totalPages; start += BATCH) {
-    const batch = Array.from(
-      { length: Math.min(BATCH, totalPages - start + 1) },
-      (_, i) => fetchPage(start + i),
-    );
-    const pages = await Promise.all(batch);
-    pages.forEach((p) => p.results.forEach((c) => ids.push(c.id)));
-    await delay(200); // pequeña pausa entre lotes
+    data.results.forEach((c) => ids.push(c.id));
   }
 
   return ids;
